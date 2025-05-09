@@ -42,13 +42,9 @@ export const CreateTable = tool(
             description: step.description,
           });
 
-          const transformFn = new Function(
-            "data",
-            `{ return (${cellResp.function})(data)}`
-          );
+          console.log("cellResp function", cellResp.cells);
 
-          // Transform the data using the function
-          const processedData = transformFn(table.cells);
+          const processedData = cellResp.cells;
 
           tableData.cells = processedData;
           table = {

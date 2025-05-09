@@ -37,105 +37,61 @@ This prompt should generate a JavaScript function to convert a 2D array of table
 
 Each cell may include one or more of the following schema objects:
 
-text
+id: (String) - A unique identifier for the cell.
+text: (Object, optional) - Defines text properties.
+enabled: (Boolean) - Indicates if text is displayed.
+value: (Object)
+default: (String) - The text content.
+color: (Object, required if text.enabled is true)
+default: (String) - The text color.
+size: (Object)
+default: (Number) - Font size.
+fontSize: (Object)
+default: (Number) - Font size.
+alignment: (Object)
+default: ("LEFT" | "RIGHT" | "CENTER") - Horizontal text alignment.
+align: ("LEFT" | "RIGHT" | "CENTER") - Horizontal cell content alignment.
+image: (Object, optional) - Defines image properties.
+enabled: (Boolean) - Indicates if an image is displayed.
+src: (Object)
+default: (String) - Image URL or path.
+input: (Object, optional) - Defines input field properties (only one interaction type allowed per cell).
+max: (String) - Maximum allowed input value.
+min: (String) - Minimum allowed input value.
+fill: (String) - Input field background color.
+default: (String) - Default input value.
+enabled: (Boolean) - Indicates if the input field is enabled.
+max_feedback_text: (String) - Feedback text for maximum value.
+min_feedback_text: (String) - Feedback text for minimum value.
+max_feedback_audio: (String) - Audio URL for maximum value feedback.
+min_feedback_audio: (String) - Audio URL for minimum value feedback.
+padding: (Object, optional) - Defines cell padding.
+enabled: (Boolean) - Indicates if padding is applied.
+vertical: (Number) - Vertical padding in pixels.
+horizontal: (Number) - Horizontal padding in pixels.
+dragDrop: (Object, optional) - Defines drag and drop properties.
+enabled: (Boolean) - Indicates if drag and drop is enabled for the cell.
+dropdown: (Object, optional) - Defines dropdown properties (only one interaction type allowed per cell).
+default: (String) - Default selected value.
+enabled: (Boolean) - Indicates if the dropdown is enabled.
+optionVariable: (String) - Variable name holding dropdown options.
+tappable: (Object, optional) - Defines tap interaction properties (only one interaction type allowed per cell).
+default: (Object)
+selected: (String | Number) - Initial selected state ("0" or "1").
+enabled: (Boolean) - Indicates if the cell is tappable.
+max_tap: (Object, optional)
+default: (Number) - Maximum number of taps allowed.
+tap_count: (Object, optional)
+default: (Number) - Initial tap count.
+clickable: (Object, optional) - Defines clickable property.
+enabled: (Boolean) - Indicates if the cell is clickable.
+fillColor: (Object, optional) - Defines background fill color.
+default: (String) - Cell background color.
+enabled: (Boolean) - Indicates if background fill is applied.
+alignVertical: ("TOP" | "CENTER" | "BOTTOM") - Vertical cell content alignment.
+correctInputValues: (Array&lt;String>, optional) - Array of correct input values for input cells.
 
-enabled (Boolean) — is text displayed?
-
-value.default (String) — the text content.
-
-color.default (String) — (Required if text is enabled) the text color.
-
-size.default (Number) — font size.
-
-image
-
-enabled (Boolean) — is an image displayed?
-
-src.default (String) — image URL or path.
-
-
-fillColor
-
-enabled (Boolean) — is background fill applied?
-
-default (String) — cell background color.
-
-hidden
-
-(Boolean) — is the cell hidden?
-
-tappable
-
-enabled (Boolean) — can the cell be tapped or clicked?
-
-default.selected (String | Number) — selected state (0 or 1).
-
-tap_count.default (Number) — number of recorded taps.
-
-align
-
-("LEFT" | "RIGHT" | "CENTER") — horizontal alignment. No default key is required.
-
-alignVertical
-
-("TOP" | "CENTER" | "BOTTOM") — vertical alignment. No default key is required.
-
-Function Requirements:
-
-List all properties as above.
-
-Implement function convertToSchema(data) that:
-
-Accepts the 2D array data.
-
-Iterates rows and cells.
-
-Builds the schema object for each cell, merging all applicable properties.
-
-By default, output only:
-
-The original 2D content array.
-
-The convertToSchema function.
-
-Brief 2-3 line explainer text.
-
-Do not output the transformed schema unless requested.
-
-Use safe defaults or ask for clarification when cell content is ambiguous.
-
-
-
-First create a list of necessary elements for each cell and then generate the function required. 
-
-never use any unnecessary elements from above in the function.
-
-Only inlclude 1 interaction type per cell out of the following: input, dropdown, tappable.
-Carefully select the interaction type based on the cell content and the user's task.
-
-Static content can exist on any cell regardless of the interaction type. This will only be based on user's task.
-
-
-Don't use any backtics anywhere in the response
-
-
-    "text": "<your accompanying text explanation, This should not contain any functions or unnecessary data structures, just an explaination text. And the overall purpose of current context>",
-    "function":
-        "<Write a JavaScript function named generateStartingState(data) that builds and returns the game’s starting state as a two‑dimensional array.
-
-        Use schema definition provided for the cells.
-Requirements
-• The function must return only a 2D array—no 1D or 3D arrays.
-• Include only the logic needed to construct the starting state; do not add any evaluation or correctness checks.
-• Do not use console.log anywhere.
-• Do not define or call any helper functions—put all code inside generateStartingState.
-• Do not include any usage examples or additional wrapper code—the output must be exactly the function definition.
-• Do not use backtick characters in your reply.
-
-Data
-Assume that the input parameter data supplies exactly the values you need to assemble the table.
-
-Only return the function definition. No function usage or examples and no comments. Only function. Only function definition.>"
+you will be given an example output of cells array based on the semantically similar requirements. you need to generate a similar cells array like it is provided to you in from of example.
 
 `;
 
@@ -303,6 +259,8 @@ Return Nothing but the JSON object.
 only return the JSON object.
 
 Only the json object without any backtics or code blocks.
+
+you will be given an example output of tappable based on the semantically similar requirements. you need to generate tappable like it is provided to you in from of example.
 `;
 
 export const evaluationPrompt = `
@@ -386,4 +344,6 @@ Return Nothing but the JSON object.
 only return the JSON object.
 
 Only the json object without any backtics or code blocks.
+
+you will be given an example output of evaluation based on the semantically similar requirements. you need to generate evaluation like it is provided to you in from of example.
 `;

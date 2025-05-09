@@ -7,7 +7,7 @@ import { BaseMessage, SystemMessage } from "@langchain/core/messages";
 import { CreateTable } from "./tools/createTable";
 
 // 1. Initialize LLM
-export const llm = new ChatOpenAI({ model: "o4-mini" });
+export const llm = new ChatOpenAI({ model: "gpt-4o" });
 
 const GraphAnnotation = Annotation.Root({
   messages: Annotation<BaseMessage[]>({
@@ -42,7 +42,9 @@ const planner = async (props: any) => {
   const userPrompt = messages[messages?.length - 1].content;
   const planPrompt = `Parse this into JSON array of tasks: [{ component: string, requirements: string }] 
   available components are ${await GetAvailableComponents.invoke("")} 
-  \n ${userPrompt}`;
+  \n 
+  
+  user prompt: ${userPrompt}`;
   const resp = await llm
     .withStructuredOutput(
       z.object({

@@ -13,10 +13,54 @@ export const tableSchema = z.object({
 });
 
 export const cellSchema = z.object({
-  text: z.string(),
-  function: z
-    .string()
-    .describe("Only function no backticks and function usage"),
+  cells: z.array(
+    z.array(
+      z.object({
+        id: z.string(),
+        text: z.object({
+          color: z.object({ default: z.string() }),
+          value: z.object({ default: z.string() }),
+          enabled: z.boolean(),
+          fontSize: z.object({ default: z.number() }),
+          alignment: z.object({ default: z.enum(["LEFT", "CENTER", "RIGHT"]) }),
+        }),
+        align: z.enum(["LEFT", "CENTER", "RIGHT"]),
+        image: z.object({
+          src: z.object({ default: z.string() }),
+          enabled: z.boolean(),
+        }),
+        input: z.object({
+          max: z.string(),
+          min: z.string(),
+          fill: z.string(),
+          default: z.string(),
+          enabled: z.boolean(),
+          max_feedback_text: z.string(),
+          min_feedback_text: z.string(),
+          max_feedback_audio: z.string(),
+          min_feedback_audio: z.string(),
+        }),
+        hidden: z.boolean(),
+        dropdown: z.object({
+          default: z.string(),
+          enabled: z.boolean(),
+          optionVariable: z.string(),
+        }),
+        tappable: z.object({
+          default: z.object({ selected: z.string() }),
+          enabled: z.boolean(),
+        }),
+        clickable: z.object({ enabled: z.boolean() }),
+        fillColor: z.object({ default: z.string(), enabled: z.boolean() }),
+        alignVertical: z.enum(["TOP", "CENTER", "BOTTOM"]),
+        correctInputValues: z.array(z.string()),
+        imageBackground: z.object({
+          src: z.object({ default: z.string() }),
+          enabled: z.boolean(),
+        }),
+      })
+    )
+  ),
 });
 
 export const tappableSchema = z.object({
